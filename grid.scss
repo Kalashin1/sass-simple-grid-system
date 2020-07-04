@@ -1,0 +1,91 @@
+@use "default";
+
+// Declaring variables
+
+$xlargeDMaxWidth : 1248px;
+$largeDMaxWidth : 1152px;
+$largeDMinWidth : 960px;
+$medDMaxWidth : 864px;
+$medDMinWidth : 564px;
+$smallDMaxWidth : 480px;
+$margin : 2%;
+
+@mixin grid($i) {
+    width: (((100% / 12) * $i) - $margin);
+    margin-right: $margin;
+    margin-bottom: $margin;
+    margin-top: $margin;
+    padding: $margin;
+    overflow-x: hidden;
+    &:last-child{
+        margin-right: 0 !important;
+    }
+    &:first-child{
+        margin-left: $margin !important;
+    }
+}
+
+body{
+    display: flex;
+    max-width: 100vw;
+    padding: 0;
+    align-content: center;
+    flex-direction: column;
+}
+
+.container
+{
+    width: 90%;
+    display: flex;
+    padding: 0 .5rem .5rem .5rem;
+    flex-direction: column;
+    margin: 0;
+    overflow-x: hidden;
+    align-self: center;
+    justify-self: center;
+}
+    
+.row
+{
+    max-width: 100%;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+
+    $col-length : 13;
+    @for $i from 1 to $col-length {
+        .col-#{$i}{
+            @include grid($i);
+        }
+    }
+    @media screen and (max-width: $smallDMaxWidth){
+    @for $i from 1 to $col-length {
+        .col-small-#{$i}{
+            @include grid($i);}
+        }
+    }   
+    @media screen and (min-width: $medDMinWidth) and (max-width: $medDMaxWidth){
+        @for $i from 1 to $col-length {
+            .col-medium-#{$i}{
+                @include grid($i);
+            }
+        }
+    }
+    @media screen and (min-width: $largeDMinWidth) and (max-width: $largeDMaxWidth){
+        @for $i from 1 to $col-length {
+            .col-large-#{$i}{
+                @include grid($i);
+            }
+        }
+    }
+    @media screen and (min-width: $xlargeDMaxWidth){
+    @for $i from 1 to $col-length {
+        .col-xlarge-#{$i}{
+            @include grid($i);
+            }
+        }
+    } 
+}
+
