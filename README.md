@@ -4,7 +4,8 @@ This is a simple scss grid system, it is responsive and supports different brows
 To center content give a div tag a class of container.
 Nest another div tage inside the container and that should have a class of row. the example below demonstrates better
 
-//for fixed width columns
+<!-- for fixed width columns -->
+
 <div class="container">
   <div class="row">
      <div class="col-4">
@@ -20,7 +21,7 @@ Nest another div tage inside the container and that should have a class of row. 
 <div>
 
 
-//you can make the columns responsive across different breakpoints and across different screens
+<!-- you can make the columns responsive across different breakpoints and across different screens -->
 <div class="container">
   <div class="row">
      <div class="col-small-12 col-medium-6 col-large-4">
