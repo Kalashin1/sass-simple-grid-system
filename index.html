@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="grid.css" media="screen">
+    <style>
+        form{
+            width: 100%;
+            margin-top: 2rem;
+        }
+        .form-input{
+            margin: 1rem 0;
+        }
+        input[type=text], input[type=password], input[type=number], input[type=date], input[type=email]{
+            -webkit-appearance : none;
+            width: 100%;
+            outline: none;
+            border: none;
+            border-bottom: 3px solid grey;
+            padding: .3rem
+        }
+        .form-input label{
+            position: relative;
+            top: -1.5rem;
+            transition: all .4s;
+        }
+        .form-input input[type=text]:focus ~ label,
+        .form-input input[type=password]:focus ~ label,
+        .form-input input[type=email]:focus ~ label,
+        .form-input input[type=date]:focus ~ label, 
+        .form-input input[type=number]:focus ~ label{
+            font-size: .8rem;
+            top: -2.7rem;
+        }
+        
+        input[type=radio]{
+            -webkit-appearance: none;
+        };
+        .radio::before{
+             width: 20px;
+            height: 20px;
+            border: 1px solid grey;
+            display: block;
+            position: relative;
+            left: 4rem;
+            top: 1.2rem;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+        <div class="col-small-12 col-medium-6 col-large-4" style="background: red;height: 200px;">
+            this col is responsive
+        </div>
+        <div class="col-small-12 col-medium-6 col-large-4" style="height: 200px; background: darkred">
+            this col is responsive
+        </div>
+        <div class="col-small-12 col-medium-6 col-large-4" style="background: green;height: 200px;">
+            this cols is responsive
+        </div>
+        <div class="col-small-12 col-medium-8 col-large-6" style="background: grey;height: 200px;">
+            this col is responsive
+        </div>
+        <div class="col-small-12 col-medium-4 col-large-3" style="background: lightblue;height: 200px;">
+            this col is responsive
+        </div>
+        <div class="col-small-12 col-medium-4 col-large-3" style="background: lightgreen;height: 200px;">
+            this col is responsive
+        </div>
+        <div class="col-small-12 col-medium-10 col-large-8" style="background: yellow;height: 200px;">
+            this col is responsive
+        </div>
+        <div class="col-small-12 col-medium-10 col-large-4" style="background: teal;height: 200px;">
+            this col is responsive
+        </div>
+    </div>
+    </div>
+    
+    <script>
+    
+    </script>
+    
+    
+    
+    
+   
+    
+</body>
+
+
+</html>

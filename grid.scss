@@ -1,91 +1,105 @@
-@use "default";
+*, *::after, *::before{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 14px;
+}
 
 // Declaring variables
 
-$xlargeDMaxWidth : 1248px;
-$largeDMaxWidth : 1152px;
-$largeDMinWidth : 960px;
-$medDMaxWidth : 864px;
-$medDMinWidth : 564px;
-$smallDMaxWidth : 480px;
+$xlargeDMaxWidth : 1840px;
+$largeDMaxWidth : 1400px;
+$medDMaxWidth : 870px;
+$smallDMaxWidth : 670px;
 $margin : 2%;
+$col-length : 13;
+
+
+@mixin mQ($args...){
+    @if (length($args)== 1)
+    {
+        @media screen and (max-width: nth($args, 1)){
+            @content;
+        }
+    }
+    @if (length($args) == 2)
+    {
+        @media screen and (max-width: nth($args, 1)) and (min-width: nth($args, 2)){
+            @content;
+        }
+    }
+}
 
 @mixin grid($i) {
-    width: (((100% / 12) * $i) - $margin);
-    margin-right: $margin;
-    margin-bottom: $margin;
-    margin-top: $margin;
-    padding: $margin;
-    overflow-x: hidden;
-    &:last-child{
-        margin-right: 0 !important;
-    }
-    &:first-child{
-        margin-left: $margin !important;
-    }
+    display: grid;
+    margin-top: .5rem;
+    grid-gap: .2rem;
+    grid-column: span $i !important;
 }
 
 body{
     display: flex;
-    max-width: 100vw;
-    padding: 0;
-    align-content: center;
-    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
 }
 
 .container
 {
-    width: 90%;
-    display: flex;
-    padding: 0 .5rem .5rem .5rem;
-    flex-direction: column;
-    margin: 0;
-    overflow-x: hidden;
-    align-self: center;
-    justify-self: center;
+    width: 92%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    justify-content: center;
+    align-items: center;
 }
     
 .row
 {
-    max-width: 100%;
-    padding: 0;
-    margin: 0;
-    overflow: hidden;
-    display: flex;
-    flex-wrap: wrap;
-
-    $col-length : 13;
-    @for $i from 1 to $col-length {
-        .col-#{$i}{
-            @include grid($i);
-        }
-    }
-    @media screen and (max-width: $smallDMaxWidth){
-    @for $i from 1 to $col-length {
-        .col-small-#{$i}{
-            @include grid($i);}
-        }
-    }   
-    @media screen and (min-width: $medDMinWidth) and (max-width: $medDMaxWidth){
-        @for $i from 1 to $col-length {
-            .col-medium-#{$i}{
-                @include grid($i);
-            }
-        }
-    }
-    @media screen and (min-width: $largeDMinWidth) and (max-width: $largeDMaxWidth){
-        @for $i from 1 to $col-length {
-            .col-large-#{$i}{
-                @include grid($i);
-            }
-        }
-    }
-    @media screen and (min-width: $xlargeDMaxWidth){
-    @for $i from 1 to $col-length {
-        .col-xlarge-#{$i}{
-            @include grid($i);
-            }
-        }
-    } 
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-gap: $margin;
+    grid-template-rows: 1fr repeat;
+    justify-content: center;
+    align-items: center;
 }
+
+
+@for $i from 1 to $col-length {
+    .col-#{$i}{
+        @include grid($i);
+    }
+}
+
+@for $i from 1 to $col-length {
+    .col-small-#{$i}{
+        @include mQ($smallDMaxWidth){
+            @include grid($i)
+        }
+    }
+}
+
+@for $i from 1 to $col-length{
+    .col-medium-#{$i}{
+        @include mQ($medDMaxWidth, $smallDMaxWidth){
+            @include grid($i)
+        }
+    }
+}
+
+@for $i from 1 to $col-length{
+     .col-large-#{$i}{
+       @include mQ($largeDMaxWidth, $medDMaxWidth){
+            @include grid($i)
+        }
+    }
+}
+
+@for $i from 1 to $col-length{
+    .col-xlarge-#{$i}{
+        @include mQ($xlargeDMaxWidth, $largeDMaxWidth){
+            @include grid($i)
+        }
+    }
+} 
 
